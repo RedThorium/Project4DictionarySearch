@@ -20,7 +20,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 			node.setLeft(redAdd(node.getLeft(), newData));
 		}
 		else{
-			node.setRight(redAdd(node.getRight(), newData))
+			node.setRight(redAdd(node.getRight(), newData));
 		}
 		return node;
 	}
@@ -29,9 +29,25 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 		
 	}
 	
-	public void contains(T item){
-		
+	public boolean contains(T item){
+		return recContains(item, root);
 	}
+	
+	private boolean recContains(T item, BSTNode currentNode){
+		if(currentNode == null){
+			return false;
+		}
+		else if(item.compareTo((T)currentNode.getData()) < 0){
+			return recContains(item, currentNode.getLeft());
+		}
+		else if(item.compareTo((T)currentNode.getData()) > 0){
+			return recContains(item, currentNode.getRight());
+		}
+		else{
+			return true;
+		}
+	}
+	
 	
 	public ArrayList<T> iterator(){
 		
