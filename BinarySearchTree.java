@@ -3,6 +3,10 @@ import java.util.*;
 public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 	protected BSTNode<T> root;
 	
+	/**
+	 * Adds a node to the tree at the leaves
+	 * @param data - any type of obejct to be added to 
+	 */
 	public void add(T data){
 		root = redAdd(root, data);
 	}
@@ -26,7 +30,22 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 	}
 	
 	public T remove(){
-		
+		BSTNode temp;
+	}
+	
+	public BSTNode get(T item, BSTNode currentNode){
+		if(currentNode == null){
+			return null;
+		}
+		else if(item.compareTo((T) currentNode.getData()) < 0){
+			return get(item, currentNode.getLeft());
+		}
+		else if(item.compareTo((T) currentNode.getData()) > 0){
+			return get(item, currentNode.getRight());
+		}
+		else{
+			return currentNode;
+		}
 	}
 	
 	public boolean contains(T item){
