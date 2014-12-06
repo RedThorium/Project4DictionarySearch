@@ -30,6 +30,10 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 		return node;
 	}
 	
+	/**
+	 * not needed for this project
+	 * @throws NoSuchMethodException
+	 */
 	public void remove(){
 		try {
 			throw new NoSuchMethodException();
@@ -39,6 +43,12 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 		}
 	}
 	
+	/**
+	 * 
+	 * @param item
+	 * @param currentNode
+	 * @return
+	 */
 	public BSTNode get(T item, BSTNode currentNode){
 		if(currentNode == null){
 			return null;
@@ -73,26 +83,37 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 		}
 	}
 	
+	/**
+	 * This method determines if the BST has words with the prefix 
+	 * @param prefix
+	 * @return
+	 */
 	public boolean containsPrefix(T prefix){
 		return recContainsPrefix(prefix, root);
 	}
 	
+	/*
+	 * The recursive step of the contains prefix method
+	 */
 	private boolean recContainsPrefix(T prefix, BSTNode currentNode){
-		String word = (String)currentNode.getData();
 		if(currentNode == null){
 			return false;
 		}
-		else if(prefix.compareTo((T)currentNode.getData()) < 0){
-			return recContains(prefix, currentNode.getLeft());
-		}
-		else if(prefix.compareTo((T)currentNode.getData()) > 0){
-			return recContains(prefix, currentNode.getRight());
-		}
-		else if(word.startsWith((String)prefix)){
-			return true;
-		}
 		else{
-			return recContains(prefix, currentNode.getLeft()) || recContains(prefix, currentNode.getRight());
+			//Creates a variable string to store the data of the node as a string
+			String word = (String)(currentNode.getData());
+			if(prefix.compareTo((T)currentNode.getData()) < 0){
+				return recContains(prefix, currentNode.getLeft());
+			}
+			else if(prefix.compareTo((T)currentNode.getData()) > 0){
+				return recContains(prefix, currentNode.getRight());
+			}
+			else if(word.startsWith((String)prefix)){
+				return true;
+			}
+			else{
+				return recContains(prefix, currentNode.getLeft()) || recContains(prefix, currentNode.getRight());
+			}
 		}
 	}
 	
