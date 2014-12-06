@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.*;
 
 public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 	protected BSTNode<T> root;
@@ -29,8 +30,13 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 		return node;
 	}
 	
-	public T remove(){
-		BSTNode temp;
+	public void remove(){
+		try {
+			throw new NoSuchMethodException();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			System.err.println("This method does not exist");
+		}
 	}
 	
 	public BSTNode get(T item, BSTNode currentNode){
@@ -67,8 +73,46 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 		}
 	}
 	
+	public boolean containsPrefix(T item){
+		return recContains(item, root);
+	}
 	
-	public ArrayList<T> iterator(){
-		
+	private boolean recContainsPrefix(T item, BSTNode currentNode){
+		if(currentNode == null){
+			return false;
+		}
+		else if(item.compareTo((T)currentNode.getData()) < 0){
+			return recContains(item, currentNode.getLeft());
+		}
+		else if(item.compareTo((T)currentNode.getData()) > 0){
+			return recContains(item, currentNode.getRight());
+		}
+		else{
+			return true;
+		}
+	}
+	
+	public void iterator(BSTNode currentNode, ArrayList array){
+		recIterator(currentNode, array);
+	}
+	
+	public void recIterator(BSTNode currentNode, ArrayList array){
+		if (currentNode != null){
+			recIterator(currentNode.getLeft(), array);
+			array.add(currentNode);
+			recIterator(currentNode.getRight(), array);
+		}
+	}
+
+	@Override
+	public boolean hasNext() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public T next() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

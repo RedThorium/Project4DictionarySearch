@@ -78,7 +78,7 @@ public class FindWords {
 		
 		//get a list of all words consisting of the given letters
 		ArrayList <String> words  = letters.getAllWords( dict );
-		
+			       
 		/*
 		 * For the solution that does not implement extra credit, 
 		 * comment out the line above and uncomment the following 
@@ -86,7 +86,6 @@ public class FindWords {
 		 */
 		//ArrayList <String> words  
 		//     = letters.getAllWords(dict.getWordsBySize(lettersToUse.length()));
-			       
 		
 		System.out.println("All words containing your letters: ");
 		for (int i = 0; i < words.size(); i++) {
