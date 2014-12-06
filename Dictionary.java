@@ -55,39 +55,7 @@ public class Dictionary {
 	 * in this Dictionary object, false otherwise
 	 */
 	public boolean isPrefixInDictionary (String prefix ) {
-		
-		
+		return words.containsPrefix(prefix);
 		//return isPrefixInDictionaryRecursive (prefix, 0, words.size() - 1 );
-	}
-
-	/*
-	 * The actual method providing recursive implementation of the binary search
-	 * for the prefix. 
-	 * @param prefix the prefix to look for in this Dictionary object.
-	 * @param begin start of the range for the current iteration
-	 * @param end end of the range for the current iteration
-	 * @return true if at least one word with the specified prefix exists 
-	 * in this Dictionary object, false otherwise'
-	 * 
-	 */
-	private boolean isPrefixInDictionaryRecursive(String prefix, int begin, int end) {
-		if (begin > end )
-			return false;
-				
-		int half = (begin+end+1) / 2;
-		int comparison = words.get(half).compareToIgnoreCase(prefix);
-		boolean isPrefix = words.get(half).startsWith(prefix);
-		if (isPrefix) 
-			return true;
-		
-		if (comparison < 0 )
-			return isPrefixInDictionaryRecursive( prefix, half + 1, end );
-		else if ( comparison > 0 )
-			return isPrefixInDictionaryRecursive( prefix, begin, half - 1);
-		else  //this case should never happen
-			return true;
-	}
-	
-	
-	
+	}	
 }

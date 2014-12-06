@@ -73,22 +73,26 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 		}
 	}
 	
-	public boolean containsPrefix(T item){
-		return recContains(item, root);
+	public boolean containsPrefix(T prefix){
+		return recContainsPrefix(prefix, root);
 	}
 	
-	private boolean recContainsPrefix(T item, BSTNode currentNode){
+	private boolean recContainsPrefix(T prefix, BSTNode currentNode){
+		String word = (String)currentNode.getData();
 		if(currentNode == null){
 			return false;
 		}
-		else if(item.compareTo((T)currentNode.getData()) < 0){
-			return recContains(item, currentNode.getLeft());
+		else if(prefix.compareTo((T)currentNode.getData()) < 0){
+			return recContains(prefix, currentNode.getLeft());
 		}
-		else if(item.compareTo((T)currentNode.getData()) > 0){
-			return recContains(item, currentNode.getRight());
+		else if(prefix.compareTo((T)currentNode.getData()) > 0){
+			return recContains(prefix, currentNode.getRight());
+		}
+		else if(word.startsWith((String)prefix)){
+			return true;
 		}
 		else{
-			return true;
+			return recContains(prefix, currentNode.getLeft()) || recContains(prefix, currentNode.getRight());
 		}
 	}
 	
