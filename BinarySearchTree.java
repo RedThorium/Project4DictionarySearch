@@ -6,7 +6,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 	
 	/**
 	 * Adds a node to the tree at the leaves
-	 * @param data - any type of obejct to be added to 
+	 * @param data - any type of object to be added to 
 	 */
 	public void add(T data){
 		root = redAdd(root, data);
@@ -96,8 +96,8 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 		}
 	}
 	
-	public void iterator(BSTNode currentNode, ArrayList array){
-		recIterator(currentNode, array);
+	public void iterator(ArrayList<String> array){
+		recIterator(root, array);
 	}
 	
 	public void recIterator(BSTNode currentNode, ArrayList array){

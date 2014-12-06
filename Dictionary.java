@@ -23,6 +23,25 @@ public class Dictionary {
 	}
 	
 	/**
+	 * Creates a new Dictionary object from this Dictionary object that 
+	 * contains words of a specified size.
+	 * @param size length of the words that should be included in the new 
+	 * Dictionary object
+	 * @return a new Dictionary object containing only the words of specified 
+	 * size
+	 */
+	public Dictionary getWordsBySize ( int size ) {
+		ArrayList <String> temp = new ArrayList<String> ();
+		ArrayList <String> wordsBySize = new ArrayList<String> ();
+		words.iterator(temp);
+		for (int i = 0; i < temp.size(); i++){
+			if (temp.get(i).length() == size)
+				wordsBySize.add(temp.get(i));
+		}
+		return new Dictionary (wordsBySize);
+	}
+	
+	/**
 	 * Creates a Dictionary object containing all words from the 
 	 * listOfWords passed as a parameter.
 	 * 
@@ -30,11 +49,14 @@ public class Dictionary {
 	 * Dictionary object
 	 */
 	public Dictionary ( ArrayList < String > listOfWords ) {
-		for(int i = 0; i < listOfWords.size(); i++){
-			words.add(listOfWords.get(i));
-		}
 		if (null == words) {
 			words = new BinarySearchTree() ;
+		}
+		else {
+			words = new BinarySearchTree() ;
+			for(int i = 0; i < listOfWords.size(); i++){
+				words.add(listOfWords.get(i));
+			}
 		}
 	}
 	 
