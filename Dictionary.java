@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class Dictionary {
 	//actual storage for the words
-	private BST_Recursive words;
+	private BST_Recursive<String> words;
 	
 	
 	/**
@@ -53,11 +53,10 @@ public class Dictionary {
 		if (null == words) {
 			words = new BST_Recursive() ;
 		}
-		else {
-			words = new BST_Recursive() ;
+//		else {
+//			words = new BST_Recursive() ;
 			for(int i = 0; i < listOfWords.size(); i++){
 				words.insert(listOfWords.get(i));
-			}
 		}
 	}
 	 

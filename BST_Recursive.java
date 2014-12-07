@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -8,7 +9,7 @@ import java.util.Queue;
  *
  * @param <T> any type that implements Comparable <T> 
  */
-public class BST_Recursive<T extends Comparable<T>>  {
+public class BST_Recursive<T extends Comparable<T>> implements Iterable<T> {
 
 	private BSTNode<T> root;
 	
@@ -83,6 +84,28 @@ public class BST_Recursive<T extends Comparable<T>>  {
 		}
 		return tree;
 	}
+	// Start of the BST Iterator class
+	public class  BSTIterator
+	{
+		
+		public void hasNext()
+		{
+			
+		}
+		
+		public void next()
+		{
+			
+		}
+		
+		
+		
+		
+	}
+	// End of the BST Iterator class
+	
+	
+	
 
 	/*
 	 * Remove a particular node - the actual action depends on number of 
@@ -283,5 +306,11 @@ public class BST_Recursive<T extends Comparable<T>>  {
 				return recContainsPrefix(prefix, currentNode.getLeft()) || recContainsPrefix(prefix, currentNode.getRight());
 			}
 		}
+	}
+
+	@Override
+	public Iterator<T> iterator() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
