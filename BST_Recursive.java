@@ -293,14 +293,14 @@ public class BST_Recursive<T extends Comparable<T>> implements Iterable<T> {
 		else{
 			//Creates a variable string to store the data of the node as a string
 			String word = (String)(currentNode.getData());
-			if(prefix.compareTo((T)currentNode.getData()) < 0){
+			if(word.startsWith((String)prefix)){
+				return true;
+			}
+			else if(prefix.compareTo((T)currentNode.getData()) < 0){
 				return recContainsPrefix(prefix, currentNode.getLeft());
 			}
 			else if(prefix.compareTo((T)currentNode.getData()) > 0){
 				return recContainsPrefix(prefix, currentNode.getRight());
-			}
-			else if(word.startsWith((String)prefix)){
-				return true;
 			}
 			else{
 				return recContainsPrefix(prefix, currentNode.getLeft()) || recContainsPrefix(prefix, currentNode.getRight());
