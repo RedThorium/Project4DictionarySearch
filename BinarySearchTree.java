@@ -9,7 +9,9 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 	 * @param data - any type of object to be added to 
 	 */
 	public void add(T data){
-		root = redAdd(root, data);
+		if(root == null){
+			root = redAdd(root, data);
+		}
 	}
 	
 	/**
@@ -139,5 +141,33 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterator<T>{
 	public T next() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	//REMOVE
+	public void print(StringBuilder output){
+		postOrderPrint(root, 1, output);
+	}
+	
+	/*
+	 * @param tree the root of the current subtree
+	 * @param level level (depth) of the current recursive call in the tree
+	 * to determine the indentation of each item 
+	 * @param output the string that accumulated the string representation
+	 * of this BST
+	 */
+	private void postOrderPrint(BSTNode<T> tree, int level, StringBuilder output)
+	{
+		if (tree != null) {
+			String spaces = "\n";
+			if (level > 0) {
+				for (int i = 0; i < level - 1; i++)
+					spaces += "   ";
+				spaces += "|--";
+			}
+			output.append(spaces);
+			output.append(tree.getData());
+			postOrderPrint(tree.getLeft(), level + 1, output);
+			postOrderPrint(tree.getRight(), level + 1, output);
+		}
 	}
 }

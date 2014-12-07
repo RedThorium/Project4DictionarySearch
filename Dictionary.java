@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class represent a dictionary of words. 
@@ -12,14 +13,14 @@ import java.util.ArrayList;
  */
 public class Dictionary {
 	//actual storage for the words
-	private BinarySearchTree words;
+	private BST_Recursive words;
 	
 	
 	/**
 	 * Creates an empty Dictionary object (no words).
 	 */
 	public Dictionary ( ) {
-		words = new BinarySearchTree() ;
+		words = new BST_Recursive() ;
 	}
 	
 	/**
@@ -33,7 +34,7 @@ public class Dictionary {
 	public Dictionary getWordsBySize ( int size ) {
 		ArrayList <String> temp = new ArrayList<String> ();
 		ArrayList <String> wordsBySize = new ArrayList<String> ();
-		words.iterator(temp);
+		words.resetNext(temp);
 		for (int i = 0; i < temp.size(); i++){
 			if (temp.get(i).length() == size)
 				wordsBySize.add(temp.get(i));
@@ -50,12 +51,12 @@ public class Dictionary {
 	 */
 	public Dictionary ( ArrayList < String > listOfWords ) {
 		if (null == words) {
-			words = new BinarySearchTree() ;
+			words = new BST_Recursive() ;
 		}
 		else {
-			words = new BinarySearchTree() ;
+			words = new BST_Recursive() ;
 			for(int i = 0; i < listOfWords.size(); i++){
-				words.add(listOfWords.get(i));
+				words.insert(listOfWords.get(i));
 			}
 		}
 	}
@@ -66,7 +67,7 @@ public class Dictionary {
 	 * @return true if the word is in this Dictionary object, false otherwise
 	 */
 	public boolean isWordInDictionary ( String word ) {
-		return words.contains(word);
+		return words.get(word) != null;
 	}
 
 	
@@ -77,7 +78,8 @@ public class Dictionary {
 	 * in this Dictionary object, false otherwise
 	 */
 	public boolean isPrefixInDictionary (String prefix ) {
-		return words.containsPrefix(prefix);
+		return  words.containsPrefix(prefix);
 		//return isPrefixInDictionaryRecursive (prefix, 0, words.size() - 1 );
 	}	
+
 }
