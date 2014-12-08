@@ -13,7 +13,7 @@ import java.util.Scanner;
  * The user is prompted for a set of letters and the program
  * produces all words that can be created from those letters.
  * 
- * @author Joanna Klukowska
+ * @author Alex Wong Modified from Lecture 6 files
  *
  */
 public class FindWords {
@@ -79,13 +79,6 @@ public class FindWords {
 		
 		//get a list of all words consisting of the given letters
 		ArrayList <String> words  = letters.getAllWords( dict );
-			       
-		/*
-		 * For the solution that does not implement extra credit, 
-		 * comment out the line above and uncomment the following 
-		 * two lines:
-		 */
-		//ArrayList <String> words  = letters.getAllWords(dict.getWordsBySize(lettersToUse.length()));
 		
 		System.out.println("All words containing your letters: ");
 		for (int i = 0; i < words.size(); i++) {

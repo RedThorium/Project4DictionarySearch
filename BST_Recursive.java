@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 
 /**
  * Provides recursive implementation of a generic binary search tree (BST). 
- * @author Joanna Klukowska
+ * @author Alex Wong Modified from Lecture 8
  *
  * @param <T> any type that implements Comparable <T> 
  */
@@ -84,28 +85,81 @@ public class BST_Recursive<T extends Comparable<T>> implements Iterable<T> {
 		}
 		return tree;
 	}
-	// Start of the BST Iterator class
-	public class  BSTIterator
-	{
+	
+	/**
+	 * Sub class Iterator that performs an inorder traversal
+	 * @author Alex Wong
+	 *
+	 */
+	public class  BSTIterator implements Iterator<T> {
 		
-		public void hasNext()
-		{
-			
+		private int numElements = 0;
+		private int curIndex = 0;
+		private ArrayList<T> inOrderArray = new ArrayList<T>();
+		
+		/**
+		 * Creates a BSTIterator with an ArrayList containing the inOrder traversal
+		 */
+		public BSTIterator(){
+			inOrder(root);
 		}
 		
-		public void next()
+		/**
+		 * Tells if there is another element in the traversal
+		 * @return - true if there is an element and false if there isn't
+		 */
+		public boolean hasNext()
 		{
-			
+			if(curIndex < numElements){
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 		
+		/**
+		 * Gets the next element 
+		 * @return - the data of the next element
+		 * @throws NoSuchElementException - thrown if there is no element next
+		 */
+		public T next()	throws NoSuchElementException
+		{
+			if(hasNext()){
+				return inOrderArray.get(curIndex++);
+			}
+			else{
+				throw new NoSuchElementException();
+			}
+		}
 		
-		
-		
-	}
-	// End of the BST Iterator class
-	
-	
-	
+		/**
+		 * This puts the data of the tree an inOrder fashion in the inOrderArray
+		 * @param node - the traversal is conducted from this node
+		 */
+		public void inOrder(BSTNode node){
+			if (node != null) {
+				inOrder(node.getLeft());
+				inOrderArray.add((T) node.getData());
+				numElements++;
+				inOrder(node.getRight());
+			}
+		}
+
+		@Override
+		public void remove() throws UnsupportedOperationException{
+			throw new UnsupportedOperationException();
+		}
+			
+		/**
+		 * This gets the size of inOrderArray
+		 * @return - int the number of elements
+		 */
+		public int size(){
+			return numElements;
+			}
+		}
+
 
 	/*
 	 * Remove a particular node - the actual action depends on number of 
@@ -276,8 +330,8 @@ public class BST_Recursive<T extends Comparable<T>> implements Iterable<T> {
 	
 	/**
 	 * This method determines if the BST has words with the prefix 
-	 * @param prefix
-	 * @return
+	 * @param prefix - a string 
+	 * @return - true if the it has the prefix infront and false if it doesn't
 	 */
 	public boolean containsPrefix(T prefix){
 		return recContainsPrefix(prefix, root);
@@ -307,10 +361,56 @@ public class BST_Recursive<T extends Comparable<T>> implements Iterable<T> {
 			}
 		}
 	}
+	
+	/**
+	 * This makes the tree balanced and less linear
+	 * @return - the balanced tree
+	 */
+	public BST_Recursive<T> balance(){
+			//Holds the inorder data of the nodes
+			ArrayList<T> nodeList = new ArrayList<T>();
+			//New binary search tree
+			BST_Recursive<T> newBST = new BST_Recursive<T>();
+			//Transfers the tree to nodeList inorder
+			BSTIterator i = new BSTIterator();
+			while(i.hasNext()){
+				nodeList.add(i.next());
+			}
+			
+			newBST.insertNodes(nodeList, 0, nodeList.size()-1);
+			return newBST;
+	}
+	
+	/**
+	 * This recursively recreates a balanced tree 
+	 * @param nodeList - the ArrayList<T> that contains the data of the former tree 
+	 * @param first - the first index that this is called on
+	 * @param last - the last index that this is called on
+	 */
+	private void insertNodes(ArrayList<T> nodeList, int first, int last){
+		//if there is one left in nodeList
+		if(first == last)
+		{
+			this.insert(nodeList.get(first));
+		}
+		//if there are two left in nodeList
+		else if(first + 1 == last){
+			this.insert(nodeList.get(first));
+			this.insert(nodeList.get(last));
+		}
+		//if there are more than two left in the nodeList
+		else{
+			int mid = (first + last)/2;
+			this.insert(nodeList.get(mid));
+			this.insertNodes(nodeList, first, mid-1);
+			this.insertNodes(nodeList, mid+1, last);
+		}
+	}
 
-	@Override
+	/**
+	 * Creates a BSTIterator
+	 */
 	public Iterator<T> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new BSTIterator();
 	}
 }

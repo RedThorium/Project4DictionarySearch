@@ -6,7 +6,7 @@ import java.util.Collections;
  * The class represents a collection of letters.
  * It provides a way of creating sets of words from the stored letters 
  * given a dictionary.  
- * @author Joanna Klukowska
+ * @author Alex Wong Modified from Lecture 6 files
  */
 public class LetterBag {
 	//the letters in the object

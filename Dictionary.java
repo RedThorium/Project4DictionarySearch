@@ -8,7 +8,7 @@ import java.util.List;
  * It also can produce a dictionary in which the words are limited
  * to a particular length. 
  * 
- * @author Joanna Klukowska
+ * @author Alex Wong Modified from Lecture 6 files
  *
  */
 public class Dictionary {
@@ -53,10 +53,14 @@ public class Dictionary {
 		if (null == words) {
 			words = new BST_Recursive() ;
 		}
-//		else {
-//			words = new BST_Recursive() ;
+
 			for(int i = 0; i < listOfWords.size(); i++){
 				words.insert(listOfWords.get(i));
+				//Re-balances the tree every 50 inserts
+				if(i % 50 == 0)
+				{
+					words = words.balance();
+				}
 		}
 	}
 	 

@@ -4,7 +4,7 @@
  * It contains a data item that has to implement Comparable interface
  * and references to left and right subtrees. 
  * 
- * @author Joanna Klukowska
+ * @author Alex Wong Modified from Lecture 6 files
  * @version Mar 29, 2014
  *
  * @param <T> 
